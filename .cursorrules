@@ -1,0 +1,24 @@
+# Cursor Rules
+
+## General guidance
+
+Use Tailwind CSS for styling.
+Use Next.js for the framework.
+Use React Server Components for any component that doesn't require client-side interactivity.
+Use shadcn/ui components, espeically those saved in the /components/ui folder.
+
+## Context about this application
+
+This NextJS application will let people view a summary of their calendar, like "Spotify Wrapped" for their calendar.
+
+They will connect to their Google Calendar, and we will use the Google Calendar API to fetch their events.
+
+Then, we will use the events to generate a summary of their calendar.
+
+## User stories
+
+As a user, I want to be able to connect to my Google Calendar so that I can view a summary of my calendar.
+
+## Acceptance criteria
+
+Given I am on the homepage, when I connect to my Google Calendar, then I should see a summary of my calendar.
