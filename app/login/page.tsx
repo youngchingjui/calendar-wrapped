@@ -3,13 +3,22 @@ import Link from "next/link";
 
 import { Calendar } from "lucide-react";
 import GoogleSignInButton from "@/components/GoogleSignInButton";
+import { redirect } from "next/navigation";
+import { auth } from "@/auth";
 
 export const metadata: Metadata = {
   title: "Login",
   description: "Login to access your Calendar Wrapped",
 };
 
-export default function LoginPage() {
+export default async function LoginPage() {
+
+  // If logged in already, redirect to homepage
+  const session = await auth();
+  if (session) {
+    redirect("/");
+  }
+
   return (
     <div className="container relative h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
       <div className="relative hidden h-full flex-col bg-muted p-10 text-white lg:flex dark:border-r">
