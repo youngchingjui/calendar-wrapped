@@ -7,7 +7,7 @@ function GoogleSignInButton() {
     <form
       action={async () => {
         "use server";
-        await signIn("google");
+        await signIn("google", { redirectTo: "/" });
       }}
     >
       <Button variant="outline" className="w-full" type="submit">
