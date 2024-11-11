@@ -6,8 +6,11 @@ import LogoutButton from "@/components/LogoutButton";
 const getCalendarData = async (userId: string) => {
   const session = await auth();
   const calendarId = "primary";
+  const now = new Date();
+  const startOfYear = new Date(now.getFullYear(), 0, 1).toISOString();
+  const endOfYear = new Date(now.getFullYear(), 11, 31, 23, 59, 59).toISOString();
   const calendarData = await fetch(
-    `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events`,
+    `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events?timeMin=${startOfYear}&timeMax=${endOfYear}`,
     {
       headers: {
         Authorization: `Bearer ${session.accessToken}`,
