@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Calendar } from 'lucide-react'
+import { calculateStats } from '@/lib/utils'
 
 // Mock data for 2024 calendar entries
 const calendarData = [
@@ -24,46 +25,47 @@ const calendarData = [
 ]
 
 // Helper function to calculate statistics
-const calculateStats = (data) => {
-  const categories = {}
-  const months = Array(12).fill(0)
-  let busyDay = { date: '', count: 0 }
-  let currentStreak = 0
-  let longestStreak = 0
+// const calculateStats = (data) => {
+//   const categories = {}
+//   const months = Array(12).fill(0)
+//   let busyDay = { date: '', count: 0 }
+//   let currentStreak = 0
+//   let longestStreak = 0
 
-  data.forEach(entry => {
-    const date = new Date(entry.date)
-    const month = date.getMonth()
+//   data.forEach(entry => {
+//     const date = new Date(entry.date)
+//     const month = date.getMonth()
 
-    // Count events per category
-    categories[entry.category] = (categories[entry.category] || 0) + 1
+//     // Count events per category
+//     categories[entry.category] = (categories[entry.category] || 0) + 1
 
-    // Count events per month
-    months[month]++
+//     // Count events per month
+//     months[month]++
 
-    // Find busiest day
-    if (months[month] > busyDay.count) {
-      busyDay = { date: entry.date, count: months[month] }
-    }
+//     // Find busiest day
+//     if (months[month] > busyDay.count) {
+//       busyDay = { date: entry.date, count: months[month] }
+//     }
 
-    // Calculate longest streak (simplified)
-    currentStreak++
-    if (currentStreak > longestStreak) {
-      longestStreak = currentStreak
-    }
-  })
+//     // Calculate longest streak (simplified)
+//     currentStreak++
+//     if (currentStreak > longestStreak) {
+//       longestStreak = currentStreak
+//     }
+//   })
 
-  const topCategory = Object.entries(categories).sort((a, b) => (b[1] as number) - (a[1] as number))[0][0]
-  const busiestMonth = months.indexOf(Math.max(...months))
+//   const topCategory = Object.entries(categories).sort((a, b) => (b[1] as number) - (a[1] as number))[0][0]
+//   const busiestMonth = months.indexOf(Math.max(...months))
 
-  return {
-    totalEvents: data.length,
-    topCategory,
-    busiestMonth: new Date(2024, busiestMonth).toLocaleString('default', { month: 'long' }),
-    busyDay: new Date(busyDay.date).toLocaleDateString(),
-    longestStreak
-  }
-}
+//   return {
+//     totalEvents: data.length,
+//     topCategory,
+//     busiestMonth: new Date(2024, busiestMonth).toLocaleString('default', { month: 'long' }),
+//     busyDay: new Date(busyDay.date).toLocaleDateString(),
+//     longestStreak,
+//     totalMeetingDuration
+//   }
+// }
 
 export function CalendarWrappedComponent({ calendarData }: { calendarData: any[] }) {
   const [step, setStep] = useState(0)
@@ -71,10 +73,14 @@ export function CalendarWrappedComponent({ calendarData }: { calendarData: any[]
 
   const steps = [
     { title: "Your 2024 in Events", content: `You had a total of ${stats.totalEvents} events this year!` },
-    { title: "Category Champion", content: `Your top category was "${stats.topCategory}"` },
-    { title: "Busiest Time", content: `Your busiest month was ${stats.busiestMonth}` },
-    { title: "Day of Days", content: `Your most eventful day was on ${stats.busyDay}` },
-    { title: "Streak Master", content: `Your longest streak of consecutive days with events was ${stats.longestStreak} days!` },
+    { title: "Busiest Month", content: `Your busiest month was ${stats.busiestMonth}` },
+    { title: "Busiest Day", content: `Your busiest day was ${stats.busiestDay}` },
+    { title: "Your favorite online meeting platform", content: `You met with ${stats.mostCommonEventType} on ${stats.mostCommonLocation}` },
+    // { title: "Category Champion", content: `Your top category was "${stats.topCategory}"` },
+    // { title: "Busiest Time", content: `Your busiest month was ${stats.busiestMonth}` },
+    { title: "Total Meeting Duration", content: `You had a total of ${stats.totalMeetingDuration} minutes of meetings this year!` },
+    // { title: "Day of Days", content: `Your most eventful day was on ${stats.busyDay}` },
+    // { title: "Streak Master", content: `Your longest streak of consecutive days with events was ${stats.longestStreak} days!` },
     { title: "That's a Wrap!", content: "Thanks for an amazing 2024!" },
   ]
 

@@ -10,6 +10,9 @@ export function calculateStats(events: any[]) {
     totalEvents: events.length,
     locations: {} as Record<string, number>,
     eventTypes: {} as Record<string, number>,
+    busiestMonth: "",
+    busiestDay: "",
+    totalMeetingDuration: 0, // in minutes
   };
 
   events.forEach(event => {
@@ -21,6 +24,19 @@ export function calculateStats(events: any[]) {
     // Count event types
     if (event.eventType) {
       stats.eventTypes[event.eventType] = (stats.eventTypes[event.eventType] || 0) + 1;
+    }
+
+    // Calculate total meeting duration, excluding all-day events
+    if (
+      event.start &&
+      event.end &&
+      event.start.dateTime &&
+      event.end.dateTime
+    ) {
+      const startTime = new Date(event.start.dateTime);
+      const endTime = new Date(event.end.dateTime);
+      const duration = (endTime.getTime() - startTime.getTime()) / (1000 * 60); // duration in minutes
+      stats.totalMeetingDuration += duration;
     }
   });
 
@@ -40,5 +56,8 @@ export function calculateStats(events: any[]) {
     totalEvents: stats.totalEvents,
     mostCommonLocation,
     mostCommonEventType,
+    busiestMonth: stats.busiestMonth,
+    busiestDay: stats.busiestDay,
+    totalMeetingDuration: stats.totalMeetingDuration,
   };
 }
