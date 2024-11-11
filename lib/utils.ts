@@ -28,12 +28,14 @@ export function calculateStats(events: any[]) {
       stats.eventTypes[event.eventType] = (stats.eventTypes[event.eventType] || 0) + 1;
     }
 
-    // Calculate total meeting duration, excluding all-day events
+    // Calculate total meeting duration, excluding all-day events and events with no other invitees
     if (
       event.start &&
       event.end &&
       event.start.dateTime &&
-      event.end.dateTime
+      event.end.dateTime &&
+      event.attendees &&
+      event.attendees.length > 1
     ) {
       const startTime = new Date(event.start.dateTime);
       const endTime = new Date(event.end.dateTime);

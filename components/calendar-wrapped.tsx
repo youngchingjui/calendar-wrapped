@@ -17,11 +17,7 @@ export function CalendarWrappedComponent({ calendarData }: { calendarData: any[]
     { title: "Busiest Month", content: `Your busiest month was ${stats.busiestMonth}` },
     { title: "Busiest Day", content: `Your busiest day was ${stats.busiestDay}` },
     { title: "Your favorite online meeting platform", content: stats.mostPopularOnlineMeetingPlatform },
-    // { title: "Category Champion", content: `Your top category was "${stats.topCategory}"` },
-    // { title: "Busiest Time", content: `Your busiest month was ${stats.busiestMonth}` },
     { title: "Total Meeting Duration", content: `You had a total of ${stats.totalMeetingDuration} minutes of meetings this year!` },
-    // { title: "Day of Days", content: `Your most eventful day was on ${stats.busyDay}` },
-    // { title: "Streak Master", content: `Your longest streak of consecutive days with events was ${stats.longestStreak} days!` },
     { title: "That's a Wrap!", content: "Thanks for an amazing 2024!" },
   ]
 
