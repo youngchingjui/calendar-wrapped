@@ -26,7 +26,6 @@ export function calculateStats(events: any[]) {
     busiestDay: "",
     totalMeetingDuration: 0, // in minutes
     months: Array(12).fill(0), // Array to count events per month
-    days: Array(365).fill(0), // Array to count events per day
     years: {} as Record<number, number[]>, // Event counts per day for each year
   };
 
