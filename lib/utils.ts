@@ -13,6 +13,8 @@ export function calculateStats(events: any[]) {
     busiestMonth: "",
     busiestDay: "",
     totalMeetingDuration: 0, // in minutes
+    months: Array(12).fill(0), // Array to count events per month
+    days: Array(365).fill(0), // Array to count events per day
   };
 
   events.forEach(event => {
@@ -52,12 +54,28 @@ export function calculateStats(events: any[]) {
     ["", 0]
   )[0];
 
+  // Find the busiest month
+  const busiestMonthIndex = stats.months.indexOf(Math.max(...stats.months));
+  const busiestMonth = new Date(2024, busiestMonthIndex).toLocaleString('default', { month: 'long' });
+
+  // Find the busiest day
+  const busiestDayIndex = stats.days.indexOf(Math.max(...stats.days));
+  const busiestDay = new Date(2024, busiestDayIndex).toLocaleString('default', { day: 'numeric' });
+
+  // Find the most popular online meeting platform
+  const mostPopularOnlineMeetingPlatform = Object.entries(stats.locations).reduce(
+    (a, b) => (b[1] > a[1] ? b : a),
+    ["", 0]
+  )[0];
+
+
   return {
     totalEvents: stats.totalEvents,
     mostCommonLocation,
     mostCommonEventType,
-    busiestMonth: stats.busiestMonth,
-    busiestDay: stats.busiestDay,
+    busiestMonth,
+    busiestDay,
+    mostPopularOnlineMeetingPlatform,
     totalMeetingDuration: stats.totalMeetingDuration,
   };
 }

@@ -7,65 +7,6 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Calendar } from 'lucide-react'
 import { calculateStats } from '@/lib/utils'
 
-// Mock data for 2024 calendar entries
-const calendarData = [
-  { date: '2024-01-15', event: 'Team Meeting', category: 'Work' },
-  { date: '2024-02-14', event: 'Valentine\'s Day Dinner', category: 'Personal' },
-  { date: '2024-03-20', event: 'Spring Equinox Hike', category: 'Leisure' },
-  { date: '2024-04-01', event: 'April Fools\' Day Party', category: 'Social' },
-  { date: '2024-05-12', event: 'Mother\'s Day Brunch', category: 'Family' },
-  { date: '2024-06-21', event: 'Summer Solstice Beach Day', category: 'Leisure' },
-  { date: '2024-07-04', event: 'Independence Day BBQ', category: 'Social' },
-  { date: '2024-08-15', event: 'Annual Company Retreat', category: 'Work' },
-  { date: '2024-09-22', event: 'Autumn Equinox Nature Walk', category: 'Leisure' },
-  { date: '2024-10-31', event: 'Halloween Costume Party', category: 'Social' },
-  { date: '2024-11-28', event: 'Thanksgiving Dinner', category: 'Family' },
-  { date: '2024-12-25', event: 'Christmas Day Celebration', category: 'Family' },
-  // Add more events as needed
-]
-
-// Helper function to calculate statistics
-// const calculateStats = (data) => {
-//   const categories = {}
-//   const months = Array(12).fill(0)
-//   let busyDay = { date: '', count: 0 }
-//   let currentStreak = 0
-//   let longestStreak = 0
-
-//   data.forEach(entry => {
-//     const date = new Date(entry.date)
-//     const month = date.getMonth()
-
-//     // Count events per category
-//     categories[entry.category] = (categories[entry.category] || 0) + 1
-
-//     // Count events per month
-//     months[month]++
-
-//     // Find busiest day
-//     if (months[month] > busyDay.count) {
-//       busyDay = { date: entry.date, count: months[month] }
-//     }
-
-//     // Calculate longest streak (simplified)
-//     currentStreak++
-//     if (currentStreak > longestStreak) {
-//       longestStreak = currentStreak
-//     }
-//   })
-
-//   const topCategory = Object.entries(categories).sort((a, b) => (b[1] as number) - (a[1] as number))[0][0]
-//   const busiestMonth = months.indexOf(Math.max(...months))
-
-//   return {
-//     totalEvents: data.length,
-//     topCategory,
-//     busiestMonth: new Date(2024, busiestMonth).toLocaleString('default', { month: 'long' }),
-//     busyDay: new Date(busyDay.date).toLocaleDateString(),
-//     longestStreak,
-//     totalMeetingDuration
-//   }
-// }
 
 export function CalendarWrappedComponent({ calendarData }: { calendarData: any[] }) {
   const [step, setStep] = useState(0)
@@ -75,7 +16,7 @@ export function CalendarWrappedComponent({ calendarData }: { calendarData: any[]
     { title: "Your 2024 in Events", content: `You had a total of ${stats.totalEvents} events this year!` },
     { title: "Busiest Month", content: `Your busiest month was ${stats.busiestMonth}` },
     { title: "Busiest Day", content: `Your busiest day was ${stats.busiestDay}` },
-    { title: "Your favorite online meeting platform", content: `You met with ${stats.mostCommonEventType} on ${stats.mostCommonLocation}` },
+    { title: "Your favorite online meeting platform", content: stats.mostPopularOnlineMeetingPlatform },
     // { title: "Category Champion", content: `Your top category was "${stats.topCategory}"` },
     // { title: "Busiest Time", content: `Your busiest month was ${stats.busiestMonth}` },
     { title: "Total Meeting Duration", content: `You had a total of ${stats.totalMeetingDuration} minutes of meetings this year!` },
