@@ -32,14 +32,11 @@ export default async function Page() {
 
   const calendarData = await getCalendarData(session.user.id);
 
-  if (!calendarData) {
-    return <><div>Error fetching calendar data</div><LogoutButton /></>;
-  }
 
 
   return (
     <>
-      <CalendarWrappedComponent calendarData={calendarData.items} />
+      {calendarData ? <CalendarWrappedComponent calendarData={calendarData.items} /> : <div>Error fetching calendar data. Please sign out and sign back in.</div>}
       <LogoutButton />
     </>
   );
