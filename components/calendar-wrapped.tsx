@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Calendar } from 'lucide-react'
 import { calculateStats } from '@/lib/utils'
+import { ScrollArea } from '@/components/ui/scroll-area'
 
 
 export function CalendarWrappedComponent({ calendarData }: { calendarData: any[] }) {
@@ -18,6 +19,37 @@ export function CalendarWrappedComponent({ calendarData }: { calendarData: any[]
     { title: "Busiest Day", content: `Your busiest day was ${stats.busiestDay}` },
     { title: "Your favorite online meeting platform", content: stats.mostPopularOnlineMeetingPlatform },
     { title: "Total Meeting Duration", content: `You had a total of ${stats.totalMeetingDuration} minutes of meetings this year!` },
+    {
+      title: "The Most Banging Event",
+      content: (
+        <div className="flex items-start space-x-4">
+          <div className="flex-1">
+            <p className="mb-2">Which event had the most invitees?</p>
+            <h3 className="text-xl font-semibold">{stats.mostAttendeesEvent.event.summary}</h3>
+            <p className="text-sm text-muted-foreground">
+              {stats.mostAttendeesEvent.attendees.length} attendees
+            </p>
+          </div>
+          <div className="w-1/2">
+            <ScrollArea className="h-[150px] w-full rounded-md border p-4">
+              <h4 className="mb-4 text-sm font-medium leading-none">Attendees</h4>
+              {stats.mostAttendeesEvent.attendees.map((attendee, index) => (
+                <div
+                  key={index}
+                  className="text-sm"
+                  style={{
+                    opacity: 1 - index * 0.1,
+                    display: index < 15 ? 'block' : 'none',
+                  }}
+                >
+                  {attendee.displayName ? attendee.displayName : attendee.email}
+                </div>
+              ))}
+            </ScrollArea>
+          </div>
+        </div>
+      ),
+    },
     { title: "That's a Wrap!", content: "Thanks for an amazing 2024!" },
   ]
 

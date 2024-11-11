@@ -27,6 +27,10 @@ export function calculateStats(events: any[]) {
     totalMeetingDuration: 0, // in minutes
     months: Array(12).fill(0), // Array to count events per month
     years: {} as Record<number, number[]>, // Event counts per day for each year
+    mostAttendeesEvent: {
+      event: null,
+      attendees: [],
+    }
   };
 
   events.forEach(event => {
@@ -76,6 +80,11 @@ export function calculateStats(events: any[]) {
       const eventDate = new Date(event.start.dateTime);
       const monthIndex = eventDate.getMonth(); // 0-indexed
       stats.months[monthIndex]++;
+    }
+
+    // Find the event with the most attendees
+    if (event.attendees && event.attendees.length > stats.mostAttendeesEvent.attendees.length) {
+      stats.mostAttendeesEvent = { event: event, attendees: event.attendees }
     }
   });
 
@@ -127,5 +136,6 @@ export function calculateStats(events: any[]) {
     busiestDay,
     mostPopularOnlineMeetingPlatform,
     totalMeetingDuration: stats.totalMeetingDuration,
+    mostAttendeesEvent: stats.mostAttendeesEvent,
   };
 }
