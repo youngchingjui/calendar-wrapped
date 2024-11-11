@@ -20,11 +20,11 @@ export function CalendarWrappedComponent({ calendarData }: { calendarData: any[]
     { title: "Your favorite online meeting platform", content: stats.mostPopularOnlineMeetingPlatform },
     { title: "Total Meeting Duration", content: `You had a total of ${stats.totalMeetingDuration} minutes of meetings this year!` },
     {
-      title: "The Most Banging Event",
+      title: "Remember that most banging event?",
       content: (
         <div className="flex items-start space-x-4">
           <div className="flex-1">
-            <p className="mb-2">Which event had the most invitees?</p>
+            <p className="mb-2">Event with the most attendees</p>
             <h3 className="text-xl font-semibold">{stats.mostAttendeesEvent.event.summary}</h3>
             <p className="text-sm text-muted-foreground">
               {stats.mostAttendeesEvent.attendees.length} attendees
