@@ -65,7 +65,7 @@ const calculateStats = (data) => {
   }
 }
 
-export function CalendarWrappedComponent() {
+export function CalendarWrappedComponent({ calendarData }: { calendarData: any[] }) {
   const [step, setStep] = useState(0)
   const stats = calculateStats(calendarData)
 

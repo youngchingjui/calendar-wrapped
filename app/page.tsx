@@ -14,6 +14,12 @@ const getCalendarData = async (userId: string) => {
       },
     }
   );
+
+  // If error, return null
+  if (!calendarData.ok) {
+    return null;
+  }
+
   return calendarData.json();
 }
 
@@ -24,14 +30,16 @@ export default async function Page() {
     redirect("/login");
   }
 
-  // Here, we should be logged into Google. Let's get calendar data
-
   const calendarData = await getCalendarData(session.user.id);
-  console.log(calendarData);
+
+  if (!calendarData) {
+    return <><div>Error fetching calendar data</div><LogoutButton /></>;
+  }
+
 
   return (
     <>
-      <CalendarWrappedComponent />
+      <CalendarWrappedComponent calendarData={calendarData.items} />
       <LogoutButton />
     </>
   );
