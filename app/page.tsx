@@ -1,7 +1,6 @@
 import { CalendarWrappedComponent } from "@/components/calendar-wrapped";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
-import LogoutButton from "@/components/LogoutButton";
 
 const getCalendarData = async (userId: string) => {
   const session = await auth();
