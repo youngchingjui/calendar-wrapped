@@ -40,7 +40,6 @@ export default async function Page() {
   return (
     <>
       {calendarData ? <CalendarWrappedComponent calendarData={calendarData.items} /> : <div>Error fetching calendar data. Please sign out and sign back in.</div>}
-      <LogoutButton />
     </>
   );
 }
