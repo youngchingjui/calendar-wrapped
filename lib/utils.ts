@@ -1,3 +1,4 @@
+import { MeetingPartner } from "@/types";
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 
@@ -30,7 +31,9 @@ export function calculateStats(events: any[]) {
     mostAttendeesEvent: {
       event: null,
       attendees: [],
-    }
+    },
+    attendeesCount: {} as Record<string, number>, // Count of meetings with each attendee
+    topAttendees: [] as MeetingPartner[], // Sorted list of top 10 attendees
   };
 
   events.forEach(event => {
@@ -86,6 +89,14 @@ export function calculateStats(events: any[]) {
     if (event.attendees && event.attendees.length > stats.mostAttendeesEvent.attendees.length) {
       stats.mostAttendeesEvent = { event: event, attendees: event.attendees }
     }
+
+    // Count attendees
+
+    if (event.attendees) {
+      event.attendees.forEach(attendee => {
+        stats.attendeesCount[attendee.email] = (stats.attendeesCount[attendee.email] || 0) + 1;
+      });
+    }
   });
 
   // Find the most common location
@@ -127,6 +138,8 @@ export function calculateStats(events: any[]) {
     ["", 0]
   )[0];
 
+  // Find the top attendees
+  stats.topAttendees = Object.entries(stats.attendeesCount).sort((a, b) => b[1] - a[1]).slice(0, 10).map(([email, count]) => ({ email, name: email, count }));
 
   return {
     totalEvents: stats.totalEvents,
@@ -137,5 +150,6 @@ export function calculateStats(events: any[]) {
     mostPopularOnlineMeetingPlatform,
     totalMeetingDuration: stats.totalMeetingDuration,
     mostAttendeesEvent: stats.mostAttendeesEvent,
+    topAttendees: stats.topAttendees,
   };
 }

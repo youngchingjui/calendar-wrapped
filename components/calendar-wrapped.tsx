@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Calendar } from 'lucide-react'
 import { calculateStats } from '@/lib/utils'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import TopMeetingPartners from './cards/TopMeetingPartners'
 
 
 export function CalendarWrappedComponent({ calendarData }: { calendarData: any[] }) {
@@ -50,6 +51,7 @@ export function CalendarWrappedComponent({ calendarData }: { calendarData: any[]
         </div>
       ),
     },
+    { title: "Top Meeting Partners", content: <TopMeetingPartners partners={stats.topAttendees} /> },
     { title: "That's a Wrap!", content: "Thanks for an amazing 2024!" },
   ]
 
