@@ -1,5 +1,5 @@
 import { auth, signIn } from "@/auth";
-import { BarChart2, Calendar, Lock, Users } from "lucide-react";
+import { BarChart2, Calendar, Gift, Lock, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import FeatureCard from "@/components/FeatureCard";
@@ -12,6 +12,7 @@ export default async function Page() {
     <div className="flex flex-col min-h-screen bg-gradient-to-br from-purple-600 to-blue-600">
       <main className="flex-grow">
         <section className="min-h-[90vh] flex flex-col justify-center items-center py-20 text-center">
+          <Gift className="h-20 w-20 text-white mb-12" />
           <h1 className="text-4xl font-bold mb-6 text-white">
             Discover Your Year in Events
           </h1>
