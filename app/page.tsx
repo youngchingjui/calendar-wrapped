@@ -44,29 +44,13 @@ export default async function Page() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <header className="border-b">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <div className="flex items-center space-x-2">
-            <Calendar className="h-6 w-6 text-primary" />
-            <span className="text-xl font-bold">Calendar Wrapped</span>
-          </div>
-          {session ? (
-            <Link href="/dashboard">
-              <Button>Go to Dashboard</Button>
-            </Link>
-          ) : (
-            <Button variant="ghost">Sign In</Button>
-          )}
-        </div>
-      </header>
-
+    <div className="flex flex-col min-h-screen bg-gradient-to-br from-purple-600 to-blue-600">
       <main className="flex-grow">
         <section className="py-20 text-center">
-          <h1 className="text-4xl font-bold mb-6">
+          <h1 className="text-4xl font-bold mb-6 text-white">
             Discover Your Year in Events
           </h1>
-          <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto text-white">
             Calendar Wrapped gives you a fun, insightful summary of your year
             based on your Google Calendar events.
           </p>
@@ -95,7 +79,7 @@ export default async function Page() {
 
         <section className="py-20 bg-muted">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold mb-12 text-center">
+            <h2 className="text-3xl font-bold mb-12 text-center text-white">
               Key Features
             </h2>
             <div className="grid md:grid-cols-3 gap-8">
@@ -120,10 +104,10 @@ export default async function Page() {
 
         <section className="py-20">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl font-bold mb-6">
+            <h2 className="text-3xl font-bold mb-6 text-white">
               Ready to Wrap Your Year?
             </h2>
-            <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
+            <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto text-white">
               Sign in with your Google Calendar and get your personalized Year
               in Review in minutes.
             </p>
@@ -145,40 +129,6 @@ export default async function Page() {
           </div>
         </section>
       </main>
-
-      <footer className="border-t">
-        <div className="container mx-auto px-4 py-8">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center space-x-2">
-              <Calendar className="h-6 w-6 text-primary" />
-              <span className="text-xl font-bold">Calendar Wrapped</span>
-            </div>
-            <nav>
-              <ul className="flex space-x-4">
-                <li>
-                  <Link
-                    href="/privacy"
-                    className="text-muted-foreground hover:text-primary"
-                  >
-                    Privacy Policy
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/terms"
-                    className="text-muted-foreground hover:text-primary"
-                  >
-                    Terms of Service
-                  </Link>
-                </li>
-              </ul>
-            </nav>
-          </div>
-          <p className="mt-4 text-center text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Calendar Wrapped. All rights reserved.
-          </p>
-        </div>
-      </footer>
     </div>
   );
 }
