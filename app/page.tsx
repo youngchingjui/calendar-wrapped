@@ -1,47 +1,11 @@
 import { auth, signIn } from "@/auth";
-import { BarChart2, Calendar, Link, Lock, Users } from "lucide-react";
+import { BarChart2, Calendar, Lock, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import FeatureCard from "@/components/FeatureCard";
 
-const getCalendarData = async (userId: string) => {
-  const session = await auth();
-  const calendarId = "primary";
-  const now = new Date();
-  const startOfYear = new Date(now.getFullYear(), 0, 1).toISOString();
-  const endOfYear = new Date(
-    now.getFullYear(),
-    11,
-    31,
-    23,
-    59,
-    59
-  ).toISOString();
-  const calendarData = await fetch(
-    `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events?timeMin=${startOfYear}&timeMax=${endOfYear}`,
-    {
-      headers: {
-        Authorization: `Bearer ${session.accessToken}`,
-      },
-    }
-  );
-
-  // If error, return null
-  if (!calendarData.ok) {
-    return null;
-  }
-
-  return calendarData.json();
-};
-
 export default async function Page() {
   const session = await auth();
-
-  let calendarData = null;
-
-  if (session) {
-    calendarData = await getCalendarData(session.user.id);
-  }
 
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-br from-purple-600 to-blue-600">
