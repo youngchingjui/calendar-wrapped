@@ -75,7 +75,7 @@ export default function WrappedCardContent({ calendarData }: WrappedCardContentP
             className="text-center mb-6"
           >
             <h3 className="text-xl font-semibold mb-2">{steps[step].title}</h3>
-            <p className="text-muted-foreground">{steps[step].content}</p>
+            <div className="text-muted-foreground">{steps[step].content}</div>
           </motion.div>
         </AnimatePresence>
         <div className="flex justify-between mt-6">
