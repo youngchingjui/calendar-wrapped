@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { Home, FileText, LogOut, Gift } from "lucide-react";
+import { Home, FileText, LogOut, Gift, LogIn } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { auth, signOut } from "@/auth";
+import { auth, signOut, signIn } from "@/auth";
 
 export async function Footer() {
   const session = await auth();
@@ -30,7 +30,7 @@ export async function Footer() {
             Privacy Policy
           </Button>
         </Link>
-        {session && (
+        {session ? (
           <form
             action={async () => {
               "use server";
@@ -40,6 +40,18 @@ export async function Footer() {
             <Button variant="ghost" size="sm">
               <LogOut className="mr-2 h-4 w-4" />
             Logout
+            </Button>
+          </form>
+        ) : (
+          <form
+            action={async () => {
+              "use server";
+              await signIn("google", { redirectTo: "/" });
+            }}
+          >
+            <Button variant="ghost" size="sm">
+              <LogIn className="mr-2 h-4 w-4" />
+              Login
             </Button>
           </form>
         )}
