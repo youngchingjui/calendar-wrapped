@@ -7,3 +7,7 @@ export interface MeetingPartner {
 export interface TopMeetingPartnersProps {
   partners?: MeetingPartner[]
 }
+
+export interface WrappedCardContentProps {
+  calendarData: any;
+}
