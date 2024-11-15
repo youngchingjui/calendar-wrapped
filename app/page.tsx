@@ -3,6 +3,7 @@ import { BarChart2, Calendar, Lock, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import FeatureCard from "@/components/FeatureCard";
+import Link from "next/link";
 
 export default async function Page() {
   const session = await auth();
@@ -21,22 +22,35 @@ export default async function Page() {
 
           <Card className="max-w-md mx-auto">
             <CardContent className="pt-6">
-              <form
-                action={async () => {
-                  "use server";
-                  await signIn("google", { redirectTo: "/wrapped" });
-                }}
-              >
-                <Button size="lg" className="w-full">
-                  <span className="flex items-center">
-                    <Calendar className="mr-2 h-5 w-5" />
-                    Sign in with Google Calendar
-                  </span>
-                </Button>
-              </form>
-              <p className="mt-4 text-sm text-muted-foreground">
-                Sign in to see your Calendar Wrapped summary
-              </p>
+              {session ? (
+                <Link href="/wrapped">
+                  <Button size="lg" className="w-full">
+                    <span className="flex items-center">
+                      <Calendar className="mr-2 h-5 w-5" />
+                      Go to Your Wrapped Summary
+                    </span>
+                  </Button>
+                </Link>
+              ) : (
+                <form
+                  action={async () => {
+                    "use server";
+                    await signIn("google", { redirectTo: "/wrapped" });
+                  }}
+                >
+                  <Button size="lg" className="w-full">
+                    <span className="flex items-center">
+                      <Calendar className="mr-2 h-5 w-5" />
+                      Sign in with Google Calendar
+                    </span>
+                  </Button>
+                </form>
+              )}
+              {!session && (
+                <p className="mt-4 text-sm text-muted-foreground">
+                  Sign in to see your Calendar Wrapped summary.
+                </p>
+              )}
             </CardContent>
           </Card>
         </section>
@@ -77,17 +91,10 @@ export default async function Page() {
             </p>
             {!session && (
               <Button size="lg">
-                {session ? (
-                  <span className="flex items-center">
-                    <span className="mr-2">Signing In...</span>
-                    <span className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></span>
-                  </span>
-                ) : (
-                  <span className="flex items-center">
-                    <Calendar className="mr-2 h-5 w-5" />
-                    Sign in with Google Calendar
-                  </span>
-                )}
+                <span className="flex items-center">
+                  <Calendar className="mr-2 h-5 w-5" />
+                  Sign in with Google Calendar
+                </span>
               </Button>
             )}
           </div>
