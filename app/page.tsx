@@ -11,7 +11,7 @@ export default async function Page() {
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-br from-purple-600 to-blue-600">
       <main className="flex-grow">
-        <section className="min-h-[90vh] flex flex-col justify-center items-center py-20 text-center">
+        <section className="h-[800px] flex flex-col justify-center items-center py-20 text-center">
           <Gift className="h-20 w-20 text-white mb-12" />
           <h1 className="text-4xl font-bold mb-6 text-white">
             Discover Your Year in Events
@@ -56,7 +56,7 @@ export default async function Page() {
           </Card>
         </section>
 
-        <section className="min-h-[90vh] flex flex-col justify-center items-center py-20 bg-muted">
+        <section className="h-[800px] flex flex-col justify-center items-center py-20 bg-muted">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold mb-12 text-center text-primary">
               Key Features
@@ -81,7 +81,7 @@ export default async function Page() {
           </div>
         </section>
 
-        <section className="min-h-[90vh] flex flex-col justify-center items-center py-20">
+        <section className="h-[800px] flex flex-col justify-center items-center py-20">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl font-bold mb-6 text-white">
               Ready to Wrap Your Year?
