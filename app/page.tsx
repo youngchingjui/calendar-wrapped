@@ -79,7 +79,7 @@ export default async function Page() {
 
         <section className="min-h-[90vh] flex flex-col justify-center items-center py-20 bg-muted">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold mb-12 text-center text-white">
+            <h2 className="text-3xl font-bold mb-12 text-center text-primary">
               Key Features
             </h2>
             <div className="grid md:grid-cols-3 gap-8">
