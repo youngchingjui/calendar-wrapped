@@ -1,22 +1,21 @@
-import { Metadata } from "next";
-import Link from "next/link";
+import { Metadata } from "next"
+import Link from "next/link"
 
-import { Calendar } from "lucide-react";
-import GoogleSignInButton from "@/components/GoogleSignInButton";
-import { redirect } from "next/navigation";
-import { auth } from "@/auth";
+import { Calendar } from "lucide-react"
+import GoogleSignInButton from "@/components/GoogleSignInButton"
+import { redirect } from "next/navigation"
+import { auth } from "@/auth"
 
 export const metadata: Metadata = {
   title: "Login",
   description: "Login to access your Calendar Wrapped",
-};
+}
 
 export default async function LoginPage() {
-
   // If logged in already, redirect to homepage
-  const session = await auth();
+  const session = await auth()
   if (session) {
-    redirect("/");
+    redirect("/")
   }
 
   return (
@@ -68,5 +67,5 @@ export default async function LoginPage() {
         </div>
       </div>
     </div>
-  );
+  )
 }

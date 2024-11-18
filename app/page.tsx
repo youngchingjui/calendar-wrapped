@@ -1,12 +1,12 @@
-import { auth, signIn } from "@/auth";
-import { BarChart2, Calendar, Gift, Lock, Users } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import FeatureCard from "@/components/FeatureCard";
-import Link from "next/link";
+import { auth, signIn } from "@/auth"
+import { BarChart2, Calendar, Gift, Lock, Users } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import FeatureCard from "@/components/FeatureCard"
+import Link from "next/link"
 
 export default async function Page() {
-  const session = await auth();
+  const session = await auth()
 
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-br from-purple-600 to-blue-600">
@@ -35,8 +35,8 @@ export default async function Page() {
               ) : (
                 <form
                   action={async () => {
-                    "use server";
-                    await signIn("google", { redirectTo: "/wrapped" });
+                    "use server"
+                    await signIn("google", { redirectTo: "/wrapped" })
                   }}
                 >
                   <Button size="lg" className="w-full">
@@ -102,5 +102,5 @@ export default async function Page() {
         </section>
       </main>
     </div>
-  );
+  )
 }

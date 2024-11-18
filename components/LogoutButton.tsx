@@ -1,12 +1,12 @@
-import { signOut } from "@/auth";
-import { Button } from "./ui/button";
+import { signOut } from "@/auth"
+import { Button } from "./ui/button"
 
 export default function LogoutButton() {
   return (
     <form
       action={async () => {
-        "use server";
-        await signOut();
+        "use server"
+        await signOut()
       }}
     >
       <Button
@@ -17,5 +17,5 @@ export default function LogoutButton() {
         Logout
       </Button>
     </form>
-  );
+  )
 }

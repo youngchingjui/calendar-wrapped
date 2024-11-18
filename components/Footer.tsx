@@ -1,11 +1,11 @@
-import Link from "next/link";
-import { Home, FileText, LogOut, Gift, LogIn } from "lucide-react";
+import Link from "next/link"
+import { Home, FileText, LogOut, Gift, LogIn } from "lucide-react"
 
-import { Button } from "@/components/ui/button";
-import { auth, signOut, signIn } from "@/auth";
+import { Button } from "@/components/ui/button"
+import { auth, signOut, signIn } from "@/auth"
 
 export async function Footer() {
-  const session = await auth();
+  const session = await auth()
 
   return (
     <footer>
@@ -33,20 +33,20 @@ export async function Footer() {
         {session ? (
           <form
             action={async () => {
-              "use server";
-              await signOut();
+              "use server"
+              await signOut()
             }}
           >
             <Button variant="ghost" size="sm">
               <LogOut className="mr-2 h-4 w-4" />
-            Logout
+              Logout
             </Button>
           </form>
         ) : (
           <form
             action={async () => {
-              "use server";
-              await signIn("google", { redirectTo: "/" });
+              "use server"
+              await signIn("google", { redirectTo: "/" })
             }}
           >
             <Button variant="ghost" size="sm">
@@ -57,5 +57,5 @@ export async function Footer() {
         )}
       </div>
     </footer>
-  );
+  )
 }

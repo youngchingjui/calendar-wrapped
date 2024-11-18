@@ -24,26 +24,35 @@ export default function Page() {
             </Link>
             <div className="flex items-center">
               <Calendar className="mr-2 h-6 w-6" />
-              <CardTitle className="text-2xl font-bold">Privacy Policy</CardTitle>
+              <CardTitle className="text-2xl font-bold">
+                Privacy Policy
+              </CardTitle>
             </div>
           </div>
         </CardHeader>
         <CardContent>
           <div className="prose dark:prose-invert max-w-none">
             <p>Last updated: {new Date().toLocaleDateString()}</p>
-            
+
             <h2>1. Introduction</h2>
             <p>
-              Welcome to Calendar Wrapped. We respect your privacy and are committed to protecting your personal data. 
-              This privacy policy will inform you about how we look after your personal data when you visit our website 
-              and tell you about your privacy rights and how the law protects you.
+              Welcome to Calendar Wrapped. We respect your privacy and are
+              committed to protecting your personal data. This privacy policy
+              will inform you about how we look after your personal data when
+              you visit our website and tell you about your privacy rights and
+              how the law protects you.
             </p>
 
             <h2>2. Data We Collect</h2>
-            <p>We collect and process the following data when you use Calendar Wrapped:</p>
+            <p>
+              We collect and process the following data when you use Calendar
+              Wrapped:
+            </p>
             <ul>
               <li>Personal identification information (Name, email address)</li>
-              <li>Calendar data (Event titles, dates, times, and categories)</li>
+              <li>
+                Calendar data (Event titles, dates, times, and categories)
+              </li>
               <li>Usage data (How you interact with our application)</li>
             </ul>
 
@@ -58,12 +67,16 @@ export default function Page() {
 
             <h2>4. Data Security</h2>
             <p>
-              We implement appropriate technical and organizational measures to ensure a level of security appropriate 
-              to the risk, including encryption of data in transit and at rest.
+              We implement appropriate technical and organizational measures to
+              ensure a level of security appropriate to the risk, including
+              encryption of data in transit and at rest.
             </p>
 
             <h2>5. Your Data Protection Rights</h2>
-            <p>Under certain circumstances, you have rights under data protection laws in relation to your personal data, including the right to:</p>
+            <p>
+              Under certain circumstances, you have rights under data protection
+              laws in relation to your personal data, including the right to:
+            </p>
             <ul>
               <li>Request access to your personal data</li>
               <li>Request correction of your personal data</li>
@@ -76,14 +89,16 @@ export default function Page() {
 
             <h2>6. Third-Party Services</h2>
             <p>
-              We use Google Calendar API to access your calendar data. Please refer to Google's Privacy Policy 
-              for information on how they handle your data.
+              We use Google Calendar API to access your calendar data. Please
+              refer to Google's Privacy Policy for information on how they
+              handle your data.
             </p>
 
             <h2>7. Changes to This Privacy Policy</h2>
             <p>
-              We may update our Privacy Policy from time to time. We will notify you of any changes by posting 
-              the new Privacy Policy on this page and updating the "Last updated" date.
+              We may update our Privacy Policy from time to time. We will notify
+              you of any changes by posting the new Privacy Policy on this page
+              and updating the "Last updated" date.
             </p>
           </div>
         </CardContent>
