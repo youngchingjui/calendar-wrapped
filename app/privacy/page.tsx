@@ -94,7 +94,21 @@ export default function Page() {
               handle your data.
             </p>
 
-            <h2>7. Changes to This Privacy Policy</h2>
+            <h2>7. Data Sharing and Disclosure</h2>
+            <p>
+              Your Google Calendar data is used to generate your Calendar
+              Wrapped summary. This data is not stored nor shared with anyone
+              else, including any third parties. No Google Calendar data or any
+              Google data is stored on our databases.
+            </p>
+
+            <h2>8. User Data Retention</h2>
+            <p>
+              We do not store any user data. This application does not have a
+              database, and therefore, no data retention occurs.
+            </p>
+
+            <h2>9. Changes to This Privacy Policy</h2>
             <p>
               We may update our Privacy Policy from time to time. We will notify
               you of any changes by posting the new Privacy Policy on this page
