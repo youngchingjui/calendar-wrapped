@@ -58,13 +58,21 @@ export function ActivityCalendar({ calendarData }) {
               )}
               {[...Array(getDaysInMonth(year, parseInt(month) - 1))].map(
                 (_, day) => {
-                  const dateKey = `${month}-${day + 1}`
-                  const activity = dayActivity.get(dateKey) || 0
+                  const events = calendarData.filter((event) => {
+                    const eventDate = new Date(
+                      event.start.dateTime || event.start.date
+                    )
+                    return (
+                      eventDate.getMonth() + 1 === parseInt(month) &&
+                      eventDate.getDate() === day + 1
+                    )
+                  })
+                  const activity = events.length
                   return (
                     <DayCell
                       key={`day-${day + 1}`}
-                      monthName={monthName}
                       day={day + 1}
+                      events={events}
                       activity={activity}
                       maxEvents={maxEvents}
                     />
