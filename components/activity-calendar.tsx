@@ -27,6 +27,9 @@ const activityColors = [
   "bg-purple-300",
   "bg-purple-400",
   "bg-purple-500",
+  "bg-purple-600",
+  "bg-purple-700",
+  "bg-purple-800",
 ]
 
 export function ActivityCalendar({ calendarData }) {
@@ -47,6 +50,9 @@ export function ActivityCalendar({ calendarData }) {
     dayActivity.set(dateKey, (dayActivity.get(dateKey) || 0) + 1)
   })
 
+  // Find the maximum number of events on any day
+  const maxEvents = Math.max(...dayActivity.values(), 0)
+
   return (
     <div className="p-4 bg-white rounded-lg shadow-lg">
       <div className="grid grid-cols-3 md:grid-cols-4 gap-4">
@@ -63,10 +69,16 @@ export function ActivityCalendar({ calendarData }) {
                 (_, day) => {
                   const dateKey = `${month}-${day + 1}`
                   const activity = dayActivity.get(dateKey) || 0
+                  const colorIndex = Math.min(
+                    Math.floor(
+                      (activity / maxEvents) * (activityColors.length - 1)
+                    ),
+                    activityColors.length - 1
+                  )
                   return (
                     <div
                       key={`day-${day + 1}`}
-                      className={`w-3 h-3 rounded-sm ${activityColors[activity]}`}
+                      className={`w-3 h-3 rounded-sm ${activityColors[colorIndex]}`}
                       title={`${monthName} ${
                         day + 1
                       }: Activity level ${activity}`}
