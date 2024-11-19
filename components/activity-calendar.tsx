@@ -1,3 +1,10 @@
+import {
+  Tooltip,
+  TooltipProvider,
+  TooltipTrigger,
+  TooltipContent,
+} from "./ui/tooltip"
+
 const monthMap = new Map([
   ["01", "J"],
   ["02", "F"],
@@ -76,13 +83,24 @@ export function ActivityCalendar({ calendarData }) {
                     activityColors.length - 1
                   )
                   return (
-                    <div
-                      key={`day-${day + 1}`}
-                      className={`w-3 h-3 rounded-sm ${activityColors[colorIndex]}`}
-                      title={`${monthName} ${
-                        day + 1
-                      }: Activity level ${activity}`}
-                    ></div>
+                    <TooltipProvider delayDuration={100}>
+                      <Tooltip>
+                        <TooltipTrigger>
+                          <div
+                            key={`day-${day + 1}`}
+                            className={`w-3 h-3 rounded-sm ${activityColors[colorIndex]}`}
+                            title={`${monthName} ${
+                              day + 1
+                            }: Activity level ${activity}`}
+                          ></div>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>
+                            {monthName} {day + 1}: Activity level {activity}
+                          </p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
                   )
                 }
               )}
