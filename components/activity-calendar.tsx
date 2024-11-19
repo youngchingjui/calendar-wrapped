@@ -1,9 +1,4 @@
-import {
-  Tooltip,
-  TooltipProvider,
-  TooltipTrigger,
-  TooltipContent,
-} from "./ui/tooltip"
+import { DayCell } from "./DayCell"
 
 const monthMap = new Map([
   ["01", "J"],
@@ -27,17 +22,6 @@ function getDaysInMonth(year: number, month: number) {
 function getFirstDayOfMonth(year: number, month: number) {
   return new Date(year, month, 1).getDay()
 }
-
-const activityColors = [
-  "bg-purple-100",
-  "bg-purple-200",
-  "bg-purple-300",
-  "bg-purple-400",
-  "bg-purple-500",
-  "bg-purple-600",
-  "bg-purple-700",
-  "bg-purple-800",
-]
 
 export function ActivityCalendar({ calendarData }) {
   // Extract the year from the first event
@@ -76,31 +60,14 @@ export function ActivityCalendar({ calendarData }) {
                 (_, day) => {
                   const dateKey = `${month}-${day + 1}`
                   const activity = dayActivity.get(dateKey) || 0
-                  const colorIndex = Math.min(
-                    Math.floor(
-                      (activity / maxEvents) * (activityColors.length - 1)
-                    ),
-                    activityColors.length - 1
-                  )
                   return (
-                    <TooltipProvider delayDuration={100}>
-                      <Tooltip>
-                        <TooltipTrigger>
-                          <div
-                            key={`day-${day + 1}`}
-                            className={`w-3 h-3 rounded-sm ${activityColors[colorIndex]}`}
-                            title={`${monthName} ${
-                              day + 1
-                            }: Activity level ${activity}`}
-                          ></div>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>
-                            {monthName} {day + 1}: Activity level {activity}
-                          </p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
+                    <DayCell
+                      key={`day-${day + 1}`}
+                      monthName={monthName}
+                      day={day + 1}
+                      activity={activity}
+                      maxEvents={maxEvents}
+                    />
                   )
                 }
               )}
