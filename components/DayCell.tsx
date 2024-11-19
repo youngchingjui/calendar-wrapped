@@ -23,6 +23,23 @@ const activityColors = [
   "bg-purple-800",
 ]
 
+function DayActivityDot({
+  day,
+  colorIndex,
+  ...props
+}: {
+  day: number
+  colorIndex: number
+}) {
+  return (
+    <div
+      key={`day-${day}`}
+      className={`w-3 h-3 rounded-sm ${activityColors[colorIndex]}`}
+      {...props}
+    ></div>
+  )
+}
+
 export function DayCell({ monthName, day, activity, maxEvents }: DayCellProps) {
   const colorIndex = Math.min(
     Math.floor((activity / maxEvents) * (activityColors.length - 1)),
@@ -31,20 +48,20 @@ export function DayCell({ monthName, day, activity, maxEvents }: DayCellProps) {
 
   return (
     <TooltipProvider delayDuration={100}>
-      <Tooltip>
-        <TooltipTrigger>
-          <div
-            key={`day-${day}`}
-            className={`w-3 h-3 rounded-sm ${activityColors[colorIndex]}`}
-            title={`${monthName} ${day}: Activity level ${activity}`}
-          ></div>
-        </TooltipTrigger>
-        <TooltipContent>
-          <p>
-            {monthName} {day}: Activity level {activity}
-          </p>
-        </TooltipContent>
-      </Tooltip>
+      {activity > 0 ? (
+        <Tooltip>
+          <TooltipTrigger>
+            <DayActivityDot day={day} colorIndex={colorIndex} />
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>
+              {monthName} {day}: Activity level {activity}
+            </p>
+          </TooltipContent>
+        </Tooltip>
+      ) : (
+        <DayActivityDot key={`day-${day}`} day={day} colorIndex={0} />
+      )}
     </TooltipProvider>
   )
 }
