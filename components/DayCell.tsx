@@ -46,6 +46,8 @@ export function DayCell({ day, events, activity, maxEvents }: DayCellProps) {
     activityColors.length - 1
   )
 
+  console.log(events)
+
   return (
     <TooltipProvider delayDuration={100}>
       {activity > 0 ? (
@@ -59,7 +61,9 @@ export function DayCell({ day, events, activity, maxEvents }: DayCellProps) {
                 {new Intl.DateTimeFormat("en-US", {
                   month: "short",
                   day: "numeric",
-                }).format(new Date(events[0].start.dateTime))}
+                }).format(
+                  new Date(events[0].start.dateTime || events[0].start.date)
+                )}
                 {" | "}
                 {activity} {activity === 1 ? "event" : "events"}
               </p>
