@@ -9,6 +9,7 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import TopMeetingPartners from "@/components/cards/TopMeetingPartners"
 import { calculateStats } from "@/lib/utils"
 import { WrappedCardContentProps } from "@/types"
+import { ActivityCalendar } from "@/components/activity-calendar"
 
 export default function WrappedCardContent({
   calendarData,
@@ -88,36 +89,41 @@ export default function WrappedCardContent({
   const prevStep = () => setStep((prev) => (prev > 0 ? prev - 1 : prev))
 
   return (
-    <Card className="w-full max-w-md overflow-hidden">
-      <CardContent className="p-6">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-primary">
-            2024 Calendar Wrapped
-          </h2>
-          <Calendar className="text-primary" size={24} />
-        </div>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={step}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="text-center mb-6"
-          >
-            <h3 className="text-xl font-semibold mb-2">{steps[step].title}</h3>
-            <div className="text-muted-foreground">{steps[step].content}</div>
-          </motion.div>
-        </AnimatePresence>
-        <div className="flex justify-between mt-6">
-          <Button onClick={prevStep} disabled={step === 0} variant="outline">
-            Previous
-          </Button>
-          <Button onClick={nextStep} disabled={step === steps.length - 1}>
-            {step === steps.length - 1 ? "Finish" : "Next"}
-          </Button>
-        </div>
-      </CardContent>
-    </Card>
+    <div className="flex flex-col md:flex-row gap-4">
+      <Card className="w-full max-w-md overflow-hidden">
+        <CardContent className="p-6">
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-2xl font-bold text-primary">
+              2024 Calendar Wrapped
+            </h2>
+            <Calendar className="text-primary" size={24} />
+          </div>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={step}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              className="text-center mb-6"
+            >
+              <h3 className="text-xl font-semibold mb-2">
+                {steps[step].title}
+              </h3>
+              <div className="text-muted-foreground">{steps[step].content}</div>
+            </motion.div>
+          </AnimatePresence>
+          <div className="flex justify-between mt-6">
+            <Button onClick={prevStep} disabled={step === 0} variant="outline">
+              Previous
+            </Button>
+            <Button onClick={nextStep} disabled={step === steps.length - 1}>
+              {step === steps.length - 1 ? "Finish" : "Next"}
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+      <ActivityCalendar />
+    </div>
   )
 }
