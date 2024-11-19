@@ -123,7 +123,7 @@ export default function WrappedCardContent({
           </div>
         </CardContent>
       </Card>
-      <ActivityCalendar />
+      <ActivityCalendar calendarData={calendarData} />
     </div>
   )
 }
