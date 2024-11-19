@@ -9,5 +9,5 @@ export interface TopMeetingPartnersProps {
 }
 
 export interface WrappedCardContentProps {
-  calendarData: any;
+  calendarData: any
 }
