@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Home, FileText, LogOut, Gift, LogIn } from "lucide-react"
+import { Home, FileText, LogOut, Gift, LogIn, Calendar } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { auth, signOut, signIn } from "@/auth"
@@ -17,12 +17,20 @@ export async function Footer() {
           </Button>
         </Link>
         {session && (
-          <Link href="/wrapped">
-            <Button variant="ghost" size="sm">
-              <Gift className="mr-2 h-4 w-4" />
-              Your Wrapped
-            </Button>
-          </Link>
+          <>
+            <Link href="/wrapped">
+              <Button variant="ghost" size="sm">
+                <Gift className="mr-2 h-4 w-4" />
+                Your Wrapped
+              </Button>
+            </Link>
+            <Link href="/events">
+              <Button variant="ghost" size="sm">
+                <Calendar className="mr-2 h-4 w-4" />
+                Your Events
+              </Button>
+            </Link>
+          </>
         )}
         <Link href="/privacy">
           <Button variant="ghost" size="sm">
