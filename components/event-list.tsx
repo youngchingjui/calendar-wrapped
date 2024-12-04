@@ -29,8 +29,8 @@ export function EventList({ events }: EventListProps) {
   const filteredEvents = useMemo(() => {
     return events.filter((event) => {
       const matchesSearch =
-        event.summary.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        event.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        event.summary?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        event.description?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         event.location?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         event.attendees?.some((attendee) =>
           attendee.displayName?.toLowerCase().includes(searchTerm.toLowerCase())
@@ -130,7 +130,7 @@ export function EventList({ events }: EventListProps) {
                 <TableCell>{event.location}</TableCell>
                 <TableCell>
                   {event.attendees
-                    ?.map((attendee) => attendee.displayName)
+                    ?.map((attendee) => attendee.displayName || attendee.email)
                     .join(", ")}
                 </TableCell>
                 <TableCell>{event.eventType}</TableCell>
