@@ -1,5 +1,30 @@
-export const getCalendarData = async (accessToken: string) => {
-  const calendarId = "primary"
+import { CalendarResponse } from "@/types"
+
+export async function fetchCalendarEvents(
+  accessToken: string,
+  timeMin: string,
+  timeMax: string,
+  calendarId: string = "primary"
+): Promise<CalendarResponse | null> {
+  const calendarData = await fetch(
+    `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events?timeMin=${timeMin}&timeMax=${timeMax}`,
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  )
+
+  if (!calendarData.ok) {
+    return null
+  }
+
+  return calendarData.json()
+}
+
+export const getEventsForYear = async (
+  accessToken: string
+): Promise<CalendarResponse | null> => {
   const now = new Date()
   const startOfYear = new Date(now.getFullYear(), 0, 1).toISOString()
   const endOfYear = new Date(
@@ -11,19 +36,5 @@ export const getCalendarData = async (accessToken: string) => {
     59
   ).toISOString()
 
-  const calendarData = await fetch(
-    `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events?timeMin=${startOfYear}&timeMax=${endOfYear}`,
-    {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    }
-  )
-
-  // If error, return null
-  if (!calendarData.ok) {
-    return null
-  }
-
-  return calendarData.json()
+  return fetchCalendarEvents(accessToken, startOfYear, endOfYear)
 }

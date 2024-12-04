@@ -12,13 +12,43 @@ export interface WrappedCardContentProps {
   calendarData: any
 }
 
-export interface Event {
+export interface CalendarEvent {
   id: string
-  title: string
-  description: string
-  startDate: string
-  endDate: string
-  location: string
-  attendees: string[]
-  type: string
+  summary?: string
+  description?: string
+  start: {
+    dateTime?: string
+    date?: string
+    timeZone?: string
+  }
+  end: {
+    dateTime?: string
+    date?: string
+    timeZone?: string
+  }
+  location?: string
+  attendees?: Array<{
+    email: string
+    responseStatus?: string
+    displayName?: string
+  }>
+  status?: string
+  created?: string
+  updated?: string
+  organizer?: {
+    email: string
+    displayName?: string
+    self?: boolean
+  }
+  eventType?: string
+}
+
+export interface CalendarResponse {
+  items: CalendarEvent[]
+  summary: string
+  timeZone: string
+}
+
+export interface EventListProps {
+  events: CalendarEvent[]
 }

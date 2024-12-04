@@ -1,5 +1,5 @@
 import { auth } from "@/auth"
-import { getCalendarData } from "@/lib/calendarApi"
+import { getEventsForYear } from "@/lib/calendarApi"
 import WrappedCardContent from "@/components/WrappedCardContent"
 import { redirect } from "next/navigation"
 
@@ -10,7 +10,7 @@ export default async function Page() {
     redirect("/")
   }
 
-  const calendarData = await getCalendarData(session.accessToken)
+  const calendarData = await getEventsForYear(session.accessToken)
 
   if (!calendarData) {
     return <div>No calendar data found</div>

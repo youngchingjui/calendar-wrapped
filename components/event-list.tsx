@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useMemo } from "react"
-import { Event } from "@/types"
+import { EventListProps } from "@/types"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import {
@@ -21,10 +21,6 @@ import {
 } from "@/components/ui/table"
 import { format } from "date-fns"
 
-interface EventListProps {
-  events: Event[]
-}
-
 export function EventList({ events }: EventListProps) {
   const [searchTerm, setSearchTerm] = useState("")
   const [dateFilter, setDateFilter] = useState("all")
@@ -33,32 +29,32 @@ export function EventList({ events }: EventListProps) {
   const filteredEvents = useMemo(() => {
     return events.filter((event) => {
       const matchesSearch =
-        event.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        event.summary.toLowerCase().includes(searchTerm.toLowerCase()) ||
         event.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        event.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        event.attendees.some((attendee) =>
-          attendee.toLowerCase().includes(searchTerm.toLowerCase())
+        event.location?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        event.attendees?.some((attendee) =>
+          attendee.displayName?.toLowerCase().includes(searchTerm.toLowerCase())
         )
 
       const matchesDateFilter =
         dateFilter === "all" ||
         (dateFilter === "today" &&
-          new Date(event.startDate).toDateString() ===
+          new Date(event.start.dateTime).toDateString() ===
             new Date().toDateString()) ||
         (dateFilter === "thisWeek" &&
-          new Date(event.startDate) >=
+          new Date(event.start.dateTime) >=
             new Date(new Date().setDate(new Date().getDate() - 7)) &&
-          new Date(event.startDate) <= new Date())
+          new Date(event.start.dateTime) <= new Date())
 
       const matchesTypeFilter =
-        typeFilter === "all" || event.type === typeFilter
+        typeFilter === "all" || event.eventType === typeFilter
 
       return matchesSearch && matchesDateFilter && matchesTypeFilter
     })
   }, [events, searchTerm, dateFilter, typeFilter])
 
   const eventTypes = useMemo(() => {
-    return Array.from(new Set(events.map((event) => event.type)))
+    return Array.from(new Set(events.map((event) => event.eventType)))
   }, [events])
 
   return (
@@ -124,13 +120,20 @@ export function EventList({ events }: EventListProps) {
           <TableBody>
             {filteredEvents.map((event) => (
               <TableRow key={event.id}>
-                <TableCell>{event.title}</TableCell>
+                <TableCell>{event.summary}</TableCell>
                 <TableCell>
-                  {format(new Date(event.startDate), "PPP")}
+                  {format(
+                    new Date(event.start.dateTime || event.start.date),
+                    "PPP"
+                  )}
                 </TableCell>
                 <TableCell>{event.location}</TableCell>
-                <TableCell>{event.attendees.join(", ")}</TableCell>
-                <TableCell>{event.type}</TableCell>
+                <TableCell>
+                  {event.attendees
+                    ?.map((attendee) => attendee.displayName)
+                    .join(", ")}
+                </TableCell>
+                <TableCell>{event.eventType}</TableCell>
               </TableRow>
             ))}
           </TableBody>
